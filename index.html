@@ -656,6 +656,58 @@
   <script src="js/bootstrap.js"></script>
   <script src="js/custom.js"></script>
   <script src="js/back-to-top.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() { // Pastikan DOM sedia
+        const passwordForm = document.getElementById('stembotPasswordForm');
+        if (passwordForm) {
+            passwordForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                const passwordInput = document.getElementById('stembotPasswordInput').value;
+                const errorMessageElement = document.getElementById('stembotErrorMessage');
+
+                // --- TUKAR KATA LALUAN INI KEPADA KATA LALUAN SEBENAR ANDA ---
+                const correctStembotPassword = "DFKChatBot"; 
+                // Amaran: Kata laluan ini akan kelihatan dalam kod sumber pelayar.
+
+                if (passwordInput === correctStembotPassword) {
+                    errorMessageElement.style.display = 'none';
+                    // Arahkan ke sub-laluan aplikasi Streamlit
+                    // Pastikan Caddy dikonfigurasi untuk menghidangkan Streamlit pada /app/
+                    window.location.href = "/app/"; 
+                } else {
+                    errorMessageElement.textContent = "Kata laluan yang dimasukkan salah. Sila cuba lagi.";
+                    errorMessageElement.style.display = 'block';
+                }
+            });
+        }
+
+        // Skrip untuk butang scroll to top (jika belum ada dalam back-to-top.js anda)
+        var scrollTopBtn = document.getElementById("scrollTopBtn");
+        if (scrollTopBtn) { // Semak jika elemen wujud
+            window.onscroll = function() {scrollFunction()}; // Hanya tetapkan jika butang wujud
+            function scrollFunction() {
+              if (scrollTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) {
+                scrollTopBtn.style.display = "block";
+              } else if (scrollTopBtn) {
+                scrollTopBtn.style.display = "none";
+              }
+            }
+        }
+        // Fungsi scrollToTop perlu global atau dipautkan dengan betul ke onclick
+
+        // Skrip untuk memaparkan tahun semasa di footer (jika belum ada dalam custom.js)
+        const displayDateElem = document.getElementById("displayDate");
+        if (displayDateElem) { // Semak jika elemen wujud
+            displayDateElem.innerHTML = new Date().getFullYear();
+        }
+    });
+
+    // Fungsi ini perlu global jika dipanggil dari onclick="scrollToTop()" pada butang
+    function scrollToTop() {
+      document.body.scrollTop = 0; 
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
 
 </body>
 </body>
